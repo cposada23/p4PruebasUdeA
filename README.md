@@ -13,3 +13,6 @@ Este proyecto fue generado con el  [Angular CLI](https://github.com/angular/angu
 
 ## Correr pruebas
     - `ng test`
+
+## Función t
+    -(this.gamaFunction((dof + 1) / 2) / (Math.pow(dof * Math.PI, 1 / 2) * this.gamaFunction(dof / 2) ) ) *  Math.pow(( 1 + ((x * x) / dof )), (-(dof + 1) / 2))
