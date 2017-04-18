@@ -1,3 +1,29 @@
-<h1>
-  {{title}}
-</h1>
+<form class="form-signin" novalidate [formGroup]="form">
+  <h2 class="form-signin-heading">Ingrese los valores</h2>
+  <label for="inputName" class="sr-only">Funcion</label>
+  <input type="text" id="inputName" class="form-control" placeholder="Funcion" formControlName="funcion" required autofocus>
+  <br/>
+  <label for="inputX" class="sr-only">X</label>
+  <input type="text" id="inputX" class="form-control" placeholder="Valor de x"  formControlName="x" required>
+  <br/>
+  <label for="inputDof" class="sr-only">dof</label>
+  <input type="text" id="inputDof" class="form-control" placeholder="Grado de libertad"  formControlName="dof" required>
+  <br/>
+  <label for="inputSeg" class="sr-only">Número de segmentos</label>
+  <input type="text" id="inputSeg" class="form-control" placeholder="Número de segmentos"  formControlName="num_segmentos" required>
+  <br/>
+  <br/>
+  <label for="inputError" class="sr-only">Error permitido</label>
+  <input type="text" id="inputError" class="form-control" placeholder="Error"  formControlName="error" required>
+  <br/>
+  <button class="btn btn-lg btn-primary btn-block" (click)="integrar()" [disabled]="!form.valid">Calcular</button>
+</form>
+
+
+<section *ngIf="resultado">
+  <h1>Resultado {{resultado}}</h1>
+</section>
+
+<section *ngIf="error">
+  <h1>Error: {{error}}</h1>
+</section>
