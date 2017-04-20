@@ -36,7 +36,6 @@ export class Operation {
         }if ( num_seg <= 0) {
             throw new Error('El numero de segmentos debe ser mayor que cero');
         }
-        //console.log("funcion en integrate " , fn);
         const W = X / num_seg;
         let x = 0;
         let i = 1;
@@ -48,7 +47,6 @@ export class Operation {
                 i++;
             }
             suma += (eval(fn) * (W / 3));
-            //console.log('Sumaaaa ', suma);
             return suma;
         } catch (error) {
             throw new Error(error.message);

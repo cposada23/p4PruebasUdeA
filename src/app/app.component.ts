@@ -15,6 +15,8 @@ export class AppComponent implements OnInit  {
   form: FormGroup;
   resultado: number;
   error: string;
+  integrarFunciont: boolean;
+  funcion = '(this.gamaFunction((dof + 1) / 2) / (Math.pow(dof * Math.PI, 1 / 2) * this.gamaFunction(dof / 2) ) ) *  Math.pow(( 1 + ((x * x) / dof )), (-(dof + 1) / 2))';
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -28,20 +30,40 @@ export class AppComponent implements OnInit  {
     });
   }
 
+  integrarFuncionT(e) {
+   if (e) {
+      this.integrarFunciont = true;
+      this.form.controls['funcion'].setValue('d');
+    }else {
+      this.integrarFunciont = false;
+    }
+  }
+
   integrar() {
-    const error = this.form.value.error;
-    const dof = this.form.value.dof;
-    const x = this.form.value.x;
+    let error = this.form.value.error;
+    let dof = this.form.value.dof;
+    let x = this.form.value.x;
     let num_segmentos = this.form.value.num_segmentos;
-    const funcion = this.form.value.funcion;
+    let funcion = '';
+    if (this.integrarFunciont) {
+      funcion = '(this.gamaFunction((dof + 1) / 2) / (Math.pow(dof * Math.PI, 1 / 2) * this.gamaFunction(dof / 2) ) ) *  Math.pow(( 1 + ((x * x) / dof )), (-(dof + 1) / 2))';
+    }else {
+      funcion = this.form.value.funcion;
+    }
     try {
       this.validar(x, error, dof, num_segmentos);
+      x = Number(x);
+      error = Number(error);
+      dof = Number(dof);
+      num_segmentos = Number(num_segmentos);
       let result = [this.op.integrate(funcion, num_segmentos, dof, x), this.op.integrate(funcion, num_segmentos * 2, dof, x)];
       let err = Math.abs(result[1] - result[0]);
-      while (err > error) {
+      let i = 0;
+      while (err > error && i < 9) {
         num_segmentos *= 2;
-        result = [this.op.integrate(funcion, num_segmentos, dof, x), this.op.integrate(funcion, num_segmentos * 2, dof, x)];
+        result = [this.op.integrate(funcion, num_segmentos, dof, x), this.op.integrate(funcion, (num_segmentos * 2), dof, x)];
         err = Math.abs(result[1] - result[0]);
+        i++;
       }
       this.resultado = result[1];
     } catch (error) {

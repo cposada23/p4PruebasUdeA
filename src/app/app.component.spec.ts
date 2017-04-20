@@ -30,10 +30,9 @@ describe('AppComponent', () => {
     comp.form.controls['funcion'].setValue(funcion);
     comp.form.controls['error'].setValue(0.00001);
     comp.integrar();
-    //console.log("hola resultado__", comp.resultado);
     expect(comp.resultado).toBeCloseTo(0.35005);
   });
-
+  
   it('debe calcular la integral de la funcion 2*x ', () => {
     const funcion = '2*x';
     comp.form.controls['dof'].setValue(-1);

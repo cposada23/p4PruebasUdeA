@@ -1,7 +1,10 @@
 <form class="form-signin" novalidate [formGroup]="form">
   <h2 class="form-signin-heading">Ingrese los valores</h2>
-  <label for="inputName" class="sr-only">Funcion</label>
-  <input type="text" id="inputName" class="form-control" placeholder="Funcion" formControlName="funcion" required autofocus>
+  <label for="inputName" class="sr-only">Función</label>
+  <label for="inputName" class="sr-only">Función T</label>
+  <input *ngIf="!integrarFunciont" type="text" id="inputName" class="form-control" placeholder="Funcion" formControlName="funcion" required autofocus>
+  <button *ngIf="!integrarFunciont" class="btn btn-lg" (click)="integrarFuncionT(true)">Integrar Funcion T</button>
+  <button  *ngIf="integrarFunciont" class="btn btn-lg" (click)="integrarFuncionT(false)">Integrar otra función</button>
   <br/>
   <label for="inputX" class="sr-only">X</label>
   <input type="text" id="inputX" class="form-control" placeholder="Valor de x"  formControlName="x" required>
